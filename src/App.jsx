@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getAddress } from 'ethers';
-import { URL_RPC, comprobarCadena, describirError, proveedor } from './cadena.js';
+import { CADENA_REMOTA, URL_RPC, comprobarCadena, describirError, proveedor } from './cadena.js';
 import { PERSONAJES } from './usuarios.js';
 import Billeteras from './componentes/Billeteras.jsx';
 import Maquina from './componentes/Maquina.jsx';
@@ -114,11 +114,18 @@ export default function App() {
 
       {conectado === false && (
         <section className="caja aviso">
-          <h2>La cadena local no responde</h2>
-          <p>
-            Abre una terminal en <code>maquina-expendedora</code>, ejecuta <code>npm run cadena</code> y déjala abierta. Esta
-            página se conecta sola a <code>{URL_RPC}</code>.
-          </p>
+          <h2>{CADENA_REMOTA ? 'La cadena no responde' : 'La cadena local no responde'}</h2>
+          {CADENA_REMOTA ? (
+            <p>
+              La cadena del servidor está arrancando o se reinició. Espera unos segundos: esta página vuelve a conectarse
+              sola a <code>{URL_RPC}</code>.
+            </p>
+          ) : (
+            <p>
+              Abre una terminal en <code>maquina-expendedora</code>, ejecuta <code>npm run cadena</code> y déjala abierta.
+              Esta página se conecta sola a <code>{URL_RPC}</code>.
+            </p>
+          )}
         </section>
       )}
 

@@ -1,0 +1,33 @@
+# Despliegue de la Máquina Pixel (por ejemplo en Coolify).
+# Solo "pagina" necesita dominio público; la cadena queda en la red interna
+# y la página le habla a través de /rpc.
+services:
+  cadena:
+    build:
+      context: .
+      target: cadena
+    restart: unless-stopped
+    expose:
+      - "8545"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          wget -qO- --header='Content-Type: application/json'
+          --post-data='{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}'
+          http://127.0.0.1:8545 | grep -q 0x7a69
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+
+  pagina:
+    build:
+      context: .
+      target: pagina
+    restart: unless-stopped
+    depends_on:
+      cadena:
+        condition: service_healthy
+    expose:
+      - "80"

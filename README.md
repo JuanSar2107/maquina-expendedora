@@ -28,6 +28,24 @@ Abre <http://127.0.0.1:5174> y pulsa **ENCENDER MÁQUINA**. La máquina se recue
 
 Si cambias un contrato: `npm run compilar` (compila y copia ABI y bytecode a `src/contratos/`).
 
+## Desplegar en un servidor (Coolify o Docker)
+
+`docker-compose.yml` levanta dos servicios con el mismo `Dockerfile`:
+
+- **cadena**: nodo Hardhat (chainId 31337) solo en la red interna, sin dominio público.
+- **pagina**: la página compilada en nginx. Reenvía `/rpc` a la cadena, así que todo sale por un solo dominio.
+
+En Coolify:
+
+1. *New Resource* → *Public Repository* (o tu GitHub) → este repo, rama `main`.
+2. *Build Pack*: **Docker Compose**, archivo `/docker-compose.yml`.
+3. En el servicio **pagina** pon tu dominio (por ejemplo `https://maquina.tudominio.com`). A **cadena** no le pongas dominio.
+4. *Deploy*.
+
+Para probarlo con Docker en tu computador sin Coolify, agrega `ports: ["8080:80"]` al servicio `pagina`, ejecuta `docker compose up --build` y abre <http://localhost:8080>.
+
+Ten en cuenta que es una demo: todos los visitantes comparten la misma cadena y las mismas cuentas, y si el contenedor de la cadena se reinicia todo vuelve a cero (la página lo detecta y vuelve a mostrar **ENCENDER MÁQUINA**).
+
 ## Cuentas
 
 | Cuenta | Personaje | Rol |

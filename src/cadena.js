@@ -2,7 +2,10 @@ import { Interface, JsonRpcProvider, formatEther } from 'ethers';
 import Maquina from './contratos/MaquinaExpendedora.json';
 import Atacante from './contratos/AtacanteMaquina.json';
 
-export const URL_RPC = import.meta.env.VITE_RPC_URL ?? 'http://127.0.0.1:8545';
+/** true cuando la página se compiló para un servidor (Docker/Coolify) en vez de la cadena local. */
+export const CADENA_REMOTA = Boolean(import.meta.env.VITE_RPC_URL);
+// Una ruta relativa como "/rpc" apunta al mismo dominio que sirve la página.
+export const URL_RPC = new URL(import.meta.env.VITE_RPC_URL ?? 'http://127.0.0.1:8545', window.location.origin).href;
 export const CHAIN_ID = 31337;
 
 export const proveedor = new JsonRpcProvider(URL_RPC, CHAIN_ID, {

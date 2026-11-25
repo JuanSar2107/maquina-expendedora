@@ -1,0 +1,11 @@
+node_modules
+artifacts
+cache
+dist
+typechain-types
+.git
+.env
+.env.*
+Dockerfile
+docker-compose.yml
+.dockerignore
