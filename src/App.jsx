@@ -14,13 +14,17 @@ import { leerMaquina } from './lectura.js';
 
 const CLAVE = 'maquina-expendedora.direccion';
 
+// La máquina se recuerda solo mientras la pestaña esté abierta (sobrevive a recargar).
+// Al cerrar la página se olvida y vuelve a mostrarse el botón para encenderla.
+localStorage.removeItem(CLAVE); // limpia lo que guardaban versiones anteriores
+
 export default function App() {
   const [conectado, setConectado] = useState(null);
   const [bloque, setBloque] = useState(null);
   const [billeteras, setBilleteras] = useState([]);
   const [activa, setActiva] = useState(1);
   const [tick, setTick] = useState(0);
-  const [direccion, setDireccion] = useState(() => localStorage.getItem(CLAVE) ?? '');
+  const [direccion, setDireccion] = useState(() => sessionStorage.getItem(CLAVE) ?? '');
   const [maquina, setMaquina] = useState(null);
   const [actividad, setActividad] = useState([]);
   const [ocupado, setOcupado] = useState(false);
@@ -61,7 +65,7 @@ export default function App() {
   }, [tick, direccion]);
 
   function guardarDireccion(d) {
-    localStorage.setItem(CLAVE, d);
+    sessionStorage.setItem(CLAVE, d);
     setDireccion(d);
   }
 

@@ -24,7 +24,7 @@ npm run cadena       # terminal 1: cadena local (déjala abierta)
 npm run dev          # terminal 2: la página
 ```
 
-Abre <http://127.0.0.1:5174> y pulsa **ENCENDER MÁQUINA**. Si ya tienes otra cadena Hardhat corriendo en el puerto 8545 (por ejemplo la del otro frontend del taller), la página la usa y no hace falta `npm run cadena`.
+Abre <http://127.0.0.1:5174> y pulsa **ENCENDER MÁQUINA**. La máquina se recuerda mientras la pestaña siga abierta (también al recargar); al cerrar la página se olvida y vuelve a aparecer el botón para encender una nueva. Si ya tienes otra cadena Hardhat corriendo en el puerto 8545 (por ejemplo la del otro frontend del taller), la página la usa y no hace falta `npm run cadena`.
 
 Si cambias un contrato: `npm run compilar` (compila y copia ABI y bytecode a `src/contratos/`).
 
