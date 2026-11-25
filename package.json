@@ -1,0 +1,27 @@
+{
+  "name": "maquina-expendedora",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Máquina expendedora en Solidity con 4 usuarios, pago exacto, defensa contra atacantes y frontend en React estilo pixel art.",
+  "license": "MIT",
+  "scripts": {
+    "compilar": "hardhat compile && node scripts/exportar-contratos.cjs",
+    "test": "hardhat test",
+    "cadena": "hardhat node",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fontsource/press-start-2p": "5.1.1",
+    "ethers": "6.17.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "5.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "hardhat": "2.29.1",
+    "solc": "0.8.24",
+    "vite": "^5.4.19"
+  }
+}
