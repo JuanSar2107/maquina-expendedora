@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cadena",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "cadena"],
+      "port": 8545
+    },
+    {
+      "name": "pagina",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5174
+    }
+  ]
+}
